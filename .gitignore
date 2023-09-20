@@ -1,0 +1,5 @@
+# how bout ignoring your whole existence
+.vscode
+*.o
+*.exe
+*.out
