@@ -11,4 +11,4 @@ all: $(BIN)
 	$(CC) $(CFLAGS) $<
 
 clean:
-	rm -rf *.out $(EXE)
+	rm -rf *.out *.exe $(EXE)
