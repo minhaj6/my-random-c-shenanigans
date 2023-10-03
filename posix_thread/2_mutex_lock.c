@@ -12,7 +12,7 @@ sys     0m0.002s
 */
 
 #define BIG 1000000000UL
-uint32_t counter = 0;
+uint64_t counter = 0;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 void* count_to_big(void *arg) {
@@ -25,9 +25,15 @@ void* count_to_big(void *arg) {
 }
 
 int main(int argc, char **argv) {
-    pthread_t thread;
-    pthread_create(&thread, NULL, count_to_big, NULL);
-    pthread_join(thread, NULL);
+    printf("Big counter ahead\n");
 
-    printf("Counter = %d\n", counter);
+    pthread_t thread1;
+    pthread_t thread2;
+    pthread_create(&thread1, NULL, count_to_big, NULL);
+    pthread_create(&thread2, NULL, count_to_big, NULL);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    printf("Counter = %ld\n", counter);
 }
