@@ -6,9 +6,16 @@
 /* man getrusage */
 
 long get_resident_usage() {
-    struct rusage myusage;
+    struct rusage myusage;  // rusage struct is defined in sys/resource.h
+
+    // RUSAGE_SELF = Just the current process
+    // RUSAGE_CHILDREN = All child process that has terminated
+    // https://sourceware.org/glibc/manual/2.38/html_node/Resource-Usage.html
 
     getrusage(RUSAGE_SELF, &myusage);
+
+    // The maximum resident set size used, in kilobytes. That is, the maximum 
+    // number of kilobytes of physical memory that processes used simultaneously.
     return myusage.ru_maxrss;
 }
 
